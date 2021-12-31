@@ -1,4 +1,4 @@
-import {Navigation} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 
 import App from './App';
 import AnimatedTwoColumns from './AnimatedTwoColumns';
@@ -15,7 +15,7 @@ Navigation.events().registerAppLaunchedListener(() => {
           {
             component: {
               name: 'App',
-              options: {topBar: {title: {text: 'RN Demo'}}},
+              options: { topBar: { title: { text: 'RN Demo' } } },
             },
           },
         ],

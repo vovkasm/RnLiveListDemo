@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  LayoutAnimation,
-  Pressable,
-  SafeAreaView,
-  Text,
-  View,
-} from 'react-native';
-import {makeAutoObservable} from 'mobx';
-import {observer} from 'mobx-react-lite';
+import { LayoutAnimation, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { makeAutoObservable } from 'mobx';
+import { observer } from 'mobx-react-lite';
 
 class Item {
   selected: boolean = false;
@@ -31,9 +25,7 @@ class List {
     let current: Item[] = [];
     while (remaining.length > 0) {
       const currentWidth = getItemsWidth(current);
-      const idx = remaining.findIndex(
-        item => currentWidth + getItemWidth(item) <= 2,
-      );
+      const idx = remaining.findIndex((item) => currentWidth + getItemWidth(item) <= 2);
       if (idx >= 0) {
         const [item] = remaining.splice(idx, 1);
         if (!item) {
@@ -82,31 +74,38 @@ const list = new List();
 
 const AnimatedTwoColumns = observer(() => {
   return (
-    <SafeAreaView style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-      {list.orderedItems.map(item => (
+    <SafeAreaView style={styles.container}>
+      {list.orderedItems.map((item) => (
         <ItemView key={item.id} item={item} />
       ))}
     </SafeAreaView>
   );
 });
 
-const ItemView = observer((props: {item: Item}) => {
+const ItemView = observer((props: { item: Item }) => {
   const item = props.item;
+  const itemStyle = { width: item.selected ? '100%' : '50%' };
   return (
-    <View style={{width: item.selected ? '100%' : '50%', flexDirection: 'row'}}>
-      <Pressable
-        onPress={item.onPress}
-        style={{
-          backgroundColor: 'red',
-          borderRadius: 10,
-          height: 20,
-          flex: 1,
-          margin: 5,
-        }}>
+    <View style={[styles.itemWrapper, itemStyle]}>
+      <Pressable onPress={item.onPress} style={styles.item}>
         <Text>{item.id}</Text>
       </Pressable>
     </View>
   );
 });
 
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  itemWrapper: { flexDirection: 'row' },
+  item: {
+    backgroundColor: 'red',
+    borderRadius: 10,
+    height: 20,
+    flex: 1,
+    margin: 5,
+  },
+});
 export default AnimatedTwoColumns;
