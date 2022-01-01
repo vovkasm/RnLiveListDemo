@@ -130,6 +130,12 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    sourceSets {
+        main {
+            assets.srcDirs += ['../../assets']
+        }
+    }
+    
     defaultConfig {
         applicationId "com.rnlivelistdemo"
         minSdkVersion rootProject.ext.minSdkVersion

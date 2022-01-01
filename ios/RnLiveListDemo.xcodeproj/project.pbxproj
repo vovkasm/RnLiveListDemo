@@ -14,6 +14,7 @@
 		6172F2D35A4C3AA820D92908 /* libPods-RnLiveListDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-RnLiveListDemo.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-RnLiveListDemo-RnLiveListDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-RnLiveListDemo-RnLiveListDemoTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		A239F57F2780482D004D4769 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = A239F57E2780482D004D4769 /* words.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		6423831EA8574132BED9D8CC /* libPods-RnLiveListDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnLiveListDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-RnLiveListDemo-RnLiveListDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnLiveListDemo-RnLiveListDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-RnLiveListDemo-RnLiveListDemoTests/Pods-RnLiveListDemo-RnLiveListDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RnLiveListDemo/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A239F57E2780482D004D4769 /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = words.json; path = ../assets/words.json; sourceTree = "<group>"; };
 		ABFE59519B596E51CEFDCCC0 /* libPods-RnLiveListDemo-RnLiveListDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnLiveListDemo-RnLiveListDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A881CF5CF3F2B244570E2A /* Pods-RnLiveListDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnLiveListDemo.debug.xcconfig"; path = "Target Support Files/Pods-RnLiveListDemo/Pods-RnLiveListDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-RnLiveListDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnLiveListDemo.release.xcconfig"; path = "Target Support Files/Pods-RnLiveListDemo/Pods-RnLiveListDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E233CBF5F47BEE60B243DCF8 /* Pods */,
+				ADADC4718DD3496996F21658 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -137,6 +140,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		ADADC4718DD3496996F21658 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A239F57E2780482D004D4769 /* words.json */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		E233CBF5F47BEE60B243DCF8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +156,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-RnLiveListDemo-RnLiveListDemoTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-RnLiveListDemo-RnLiveListDemoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -241,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A239F57F2780482D004D4769 /* words.json in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
