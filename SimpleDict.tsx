@@ -1,7 +1,7 @@
 import { makeAutoObservable, observable } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { Button, FlatList, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Button, FlatList, Platform, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 import FS from 'react-native-fs';
 
 type Word = {
@@ -16,6 +16,7 @@ type Word = {
 class Dict {
   _words: Word[] = [];
   _loading: boolean = false;
+  _filter: string = '';
 
   constructor() {
     // Each Word is immutable, so no need to waste time and make it observable, just collection should be enough
@@ -44,9 +45,23 @@ class Dict {
     return this._loading;
   }
 
-  get orderedWords() {
-    return this._words.slice().sort((a, b) => (a.bare < b.bare ? -1 : a.bare > b.bare ? 1 : 0));
+  get filteredWords(): Word[] {
+    if (this._filter) {
+      const filter = this._filter;
+      const ret: Word[] = [];
+      for (const w of this._words) {
+        if (w.bare.indexOf(filter) !== -1) {
+          ret.push(w);
+        }
+      }
+      return ret;
+    }
+    return this._words;
   }
+
+  setFilter = (val: string) => {
+    this._filter = val;
+  };
 }
 
 export const SimpleDictScreen = observer(() => {
@@ -58,8 +73,15 @@ export const SimpleDictScreen = observer(() => {
           <Text>Loading...</Text>
         </View>
       ) : null}
+      <TextInput
+        style={styles.filter}
+        placeholder="Filter..."
+        defaultValue=""
+        onChangeText={dict.setFilter}
+        autoCapitalize="none"
+      />
       <FlatList
-        data={dict.orderedWords}
+        data={dict.filteredWords}
         renderItem={(info) => (
           <View style={styles.item}>
             <Text>
@@ -88,6 +110,7 @@ export const SimpleDictScreen = observer(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'stretch',
   },
   listSeparator: {
     width: '100%',
@@ -102,5 +125,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
+  },
+  filter: {
+    marginHorizontal: 8,
+    marginVertical: 8,
   },
 });
