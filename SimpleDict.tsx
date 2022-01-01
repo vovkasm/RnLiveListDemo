@@ -1,4 +1,4 @@
-import { makeAutoObservable, observable } from 'mobx';
+import { makeAutoObservable, observable, reaction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Button, FlatList, Platform, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
@@ -16,11 +16,19 @@ type Word = {
 class Dict {
   _words: Word[] = [];
   _loading: boolean = false;
-  _filter: string = '';
+  _filter: string = ''; // We will update filter from filterInputValue, but with debounce
+  _filterInputValue: string = '';
 
   constructor() {
     // Each Word is immutable, so no need to waste time and make it observable, just collection should be enough
     makeAutoObservable(this, { _words: observable.shallow });
+    reaction(
+      () => this._filterInputValue,
+      (val) => {
+        this._filter = val;
+      },
+      { delay: 300 },
+    );
   }
 
   async load() {
@@ -60,7 +68,7 @@ class Dict {
   }
 
   setFilter = (val: string) => {
-    this._filter = val;
+    this._filterInputValue = val;
   };
 }
 
