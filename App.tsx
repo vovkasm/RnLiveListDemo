@@ -15,6 +15,17 @@ const App = () => (
         });
       }}
     />
+    <Button
+      title="Simple Dictionary (Huge data in FlatList)"
+      onPress={() => {
+        Navigation.push('Main', {
+          component: {
+            name: 'SimpleDict',
+            options: { topBar: { title: { text: 'Simple Dict' } } },
+          },
+        });
+      }}
+    />
   </SafeAreaView>
 );
 
