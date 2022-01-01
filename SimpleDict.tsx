@@ -80,32 +80,42 @@ export const SimpleDictScreen = observer(() => {
         onChangeText={dict.setFilter}
         autoCapitalize="none"
       />
-      <FlatList
-        data={dict.filteredWords}
-        renderItem={(info) => (
-          <View style={styles.item}>
-            <Text>
-              {info.item.bare} [{info.item.accented}]
-            </Text>
-            <Text>
-              {info.item.type} {info.item.level}
-            </Text>
-          </View>
-        )}
-        ListEmptyComponent={() => (
-          <Button
-            title="Load data"
-            onPress={() => {
-              dict.load();
-            }}
-          />
-        )}
-        ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
-        keyExtractor={(item) => `item-${item.id}`}
-      />
+      <WordsList dict={dict} />
     </SafeAreaView>
   );
 });
+
+// 1. We have to guard FlatList outside to not rerender without the need
+type WordsListProps = { dict: Dict };
+const WordsList = observer(({ dict }: WordsListProps) => (
+  <FlatList
+    data={dict.filteredWords}
+    renderItem={(info) => <WordItem word={info.item} />}
+    ListEmptyComponent={() => (
+      <Button
+        title="Load data"
+        onPress={() => {
+          dict.load();
+        }}
+      />
+    )}
+    ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
+    keyExtractor={(item) => `item-${item.id}`}
+  />
+));
+
+// 2. We have to guard each item to not rerender needlesly
+type WordItemProps = { word: Word };
+const WordItem = observer(({ word }: WordItemProps) => (
+  <View style={styles.item}>
+    <Text>
+      {word.bare} [{word.accented}]
+    </Text>
+    <Text>
+      {word.type} {word.level}
+    </Text>
+  </View>
+));
 
 const styles = StyleSheet.create({
   container: {
