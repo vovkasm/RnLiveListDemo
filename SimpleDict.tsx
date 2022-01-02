@@ -1,8 +1,9 @@
 import { makeAutoObservable, observable, reaction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { Button, FlatList, Platform, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, Platform, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 import FS from 'react-native-fs';
+import { Button } from './Button';
 
 type Word = {
   id: number;
@@ -107,8 +108,9 @@ const WordsList = observer(({ dict }: WordsListProps) => (
         }}
       />
     )}
-    ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
     keyExtractor={(item) => `item-${item.id}`}
+    // debug
+    removeClippedSubviews={false}
   />
 ));
 
@@ -130,14 +132,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
   },
-  listSeparator: {
-    width: '100%',
-    height: 1,
-    backgroundColor: 'gray',
-  },
   item: {
     paddingVertical: 8,
     paddingHorizontal: 8,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
   },
   loadingContainer: {
     position: 'absolute',

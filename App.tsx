@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import { Button } from './Button';
 
 const App = () => (
   <SafeAreaView style={styles.container}>
