@@ -65,11 +65,24 @@ class Dict {
       }
       return ret;
     }
-    return this._words;
+    return this._words.slice();
   }
 
   setFilter = (val: string) => {
     this._filterInputValue = val;
+  };
+
+  addWord = () => {
+    this._words.push({
+      id: 1000000,
+      accented: 'АБВГДЕ',
+      bare: 'АБВГДЕ',
+      level: '',
+      type: 'noun',
+      usage_en: '',
+    });
+    console.log('addWord');
+    this._words.sort((a, b) => (a.bare < b.bare ? -1 : a.bare > b.bare ? 1 : 0));
   };
 }
 
@@ -82,6 +95,7 @@ export const SimpleDictScreen = observer(() => {
           <Text>Loading...</Text>
         </View>
       ) : null}
+      <Button title="Add item" onPress={dict.addWord} />
       <TextInput
         style={styles.filter}
         placeholder="Filter..."
@@ -116,16 +130,19 @@ const WordsList = observer(({ dict }: WordsListProps) => (
 
 // 2. We have to guard each item to not rerender needlesly
 type WordItemProps = { word: Word };
-const WordItem = observer(({ word }: WordItemProps) => (
-  <View style={styles.item}>
-    <Text>
-      {word.bare} [{word.accented}]
-    </Text>
-    <Text>
-      {word.type} {word.level}
-    </Text>
-  </View>
-));
+const WordItem = observer(({ word }: WordItemProps) => {
+  console.log(`WordItem[${word.bare}] render`);
+  return (
+    <View style={styles.item}>
+      <Text>
+        {word.bare} [{word.accented}]
+      </Text>
+      <Text>
+        {word.type} {word.level}
+      </Text>
+    </View>
+  );
+});
 
 const styles = StyleSheet.create({
   container: {
